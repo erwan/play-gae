@@ -1,5 +1,11 @@
 package play.modules.gae;
 
+import java.io.File;
+import java.util.ListIterator;
+import java.util.Properties;
+
+import javax.mail.Session;
+
 import play.Logger;
 import play.Play;
 import play.PlayPlugin;
@@ -8,10 +14,6 @@ import play.jobs.JobsPlugin;
 import play.libs.IO;
 import play.libs.Mail;
 import play.mvc.Router;
-
-import javax.mail.Session;
-import java.io.File;
-import java.util.*;
 
 import com.google.apphosting.api.ApiProxy;
 
@@ -23,7 +25,8 @@ public class GAEPlugin extends PlayPlugin {
     @Override
     public void onLoad() {
         // Remove Jobs from plugin list
-        for (ListIterator<PlayPlugin> it = Play.plugins.listIterator(); it.hasNext();) {
+        ListIterator<PlayPlugin> it = Play.pluginCollection.getAllPlugins().listIterator();
+        while (it.hasNext()) {
             PlayPlugin p = it.next();
             if (p instanceof JobsPlugin) {
                 it.remove();
@@ -100,7 +103,14 @@ public class GAEPlugin extends PlayPlugin {
             Play.configuration.remove("smtp.mock");
             Play.configuration.setProperty("application.log", "DEBUG");
         }
-        Play.configuration.setProperty("webservice", "urlfetch");
+        if (!Play.configuration.containsKey("webservice")) {
+            if ("async".equals(Play.configuration.get("webservice"))) {
+                Logger.warn("The async web service implementation is known to break on Google App Engine. "
+                        + "It is recommended to leave the 'webservice' property to its default value.");
+            }
+        } else {
+            Play.configuration.setProperty("webservice", "play.modules.gae.WS");
+        }
         Play.configuration.setProperty("upload.threshold", Integer.MAX_VALUE + "");
     }
 }

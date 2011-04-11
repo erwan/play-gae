@@ -1,8 +1,9 @@
 package play.modules.gae;
 
-import com.google.apphosting.api.ApiProxy;
 import play.Logger;
 import play.Play;
+
+import com.google.apphosting.api.ApiProxy;
 
 public class GAEInit {
 

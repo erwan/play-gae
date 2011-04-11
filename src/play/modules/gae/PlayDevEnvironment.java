@@ -1,12 +1,5 @@
 package play.modules.gae;
 
-import com.google.appengine.api.datastore.dev.LocalDatastoreService;
-import com.google.appengine.tools.development.ApiProxyLocal;
-import com.google.appengine.tools.development.ApiProxyLocalFactory;
-import com.google.appengine.tools.development.LocalServerEnvironment;
-import com.google.apphosting.api.ApiProxy;
-import com.google.apphosting.api.ApiProxy.Environment;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +7,13 @@ import java.util.Map;
 import play.Play;
 import play.mvc.Scope.Session;
 import play.server.Server;
+
+import com.google.appengine.api.datastore.dev.LocalDatastoreService;
+import com.google.appengine.tools.development.ApiProxyLocal;
+import com.google.appengine.tools.development.ApiProxyLocalFactory;
+import com.google.appengine.tools.development.LocalServerEnvironment;
+import com.google.apphosting.api.ApiProxy;
+import com.google.apphosting.api.ApiProxy.Environment;
 
 public class PlayDevEnvironment implements Environment, LocalServerEnvironment {
 

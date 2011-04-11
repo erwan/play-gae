@@ -1,5 +1,9 @@
 package play.modules.gae;
 
+import play.mvc.Http.Request;
+import play.mvc.Router;
+import play.mvc.results.Redirect;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.urlfetch.URLFetchService;
@@ -7,9 +11,6 @@ import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
-import play.mvc.Http.Request;
-import play.mvc.Router;
-import play.mvc.results.Redirect;
 
 public class GAE {
     
